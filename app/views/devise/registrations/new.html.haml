@@ -2,7 +2,7 @@
   .col-md-12
     .heading.text-center.text-uppercase
       %h3 Create Account
-      %p It's free and always will be
+      %p It's free and will always be
     .row
       .col-md-12
         = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -15,7 +15,12 @@
                 = f.input :last_name, label: 'Last Name', required: true, placeholder: 'Last Name'
             .row
               .col-md-6
-                = f.input :date_of_birth, as: :date, label: 'Date of Birth', required: true
+                .form-group
+                  .input-group#datetimepicker
+                    = f.label 'Date of Birth'
+                    = f.text_field :date_of_birth, label: 'Test', class: 'form-control', required: true
+                    .input-group-addon
+                      %span.glyphicon.glyphicon-calendar
               .col-md-6
                 = f.input :email, label: 'Email', required: true, placeholder: 'Email Address'
             .row
@@ -29,3 +34,8 @@
           .form-actions.text-center.extramargin
             = f.button :submit, 'Create Account', class: 'btn btn-success'
             = link_to 'Cancel', :back ,class: 'btn btn-danger'
+
+:javascript
+  $(document).ready(function(){
+    $("#datetimepicker").datetimepicker()
+  });

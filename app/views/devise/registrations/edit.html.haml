@@ -25,7 +25,12 @@
                 - if devise_mapping.confirmable? && resource.pending_reconfirmation?
                   %p Currently waiting confirmation for: \#{resource.unconfirmed_email}
               .col-md-6
-                = f.input :date_of_birth, as: :date, label: 'Date of Birth'
+                .form-group
+                  .input-group#datetimepicker
+                    = f.label 'Date of Birth'
+                    = f.text_field :date_of_birth, label: 'Test', class: 'form-control', required: true
+                    .input-group-addon
+                      %span.glyphicon.glyphicon-calendar
             .row
               .col-md-6
                 = f.input :password, label: 'Change Password', placeholder: 'Change Password' ,autocomplete: 'off'
@@ -46,3 +51,7 @@
       %br/
       .form-actions.text-center.extramargin
         = link_to 'Delete Account', registration_path(resource_name), data: { confirm: "Are you sure?" }, class: 'btn btn-danger', method: :delete
+:javascript
+  $(document).ready(function(){
+    $("#datetimepicker").datetimepicker()
+  });
